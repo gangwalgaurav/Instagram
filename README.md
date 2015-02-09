@@ -17,5 +17,4 @@ The following advanced user stories are optional:
 
 Demo
 ####Demo:
-+![Video Walkthrough](Instagram.gif)
 +[![Alt text for your video](https://github.com/gangwalgaurav/Instagram/blob/master/Demo.gif)](https://github.com/gangwalgaurav/Instagram/blob/master/Demo.gif)
