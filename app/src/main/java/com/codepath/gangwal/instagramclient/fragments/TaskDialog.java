@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -15,12 +16,14 @@ import android.widget.TextView;
 
 import com.codepath.gangwal.instagramclient.R;
 import com.codepath.gangwal.instagramclient.adapters.CommentAdapter;
+import com.codepath.gangwal.instagramclient.pojo.Comment;
 import com.codepath.gangwal.instagramclient.pojo.InstagramPhoto;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.util.ArrayList;
+
 
 
 public class TaskDialog extends DialogFragment {
@@ -44,6 +47,8 @@ public class TaskDialog extends DialogFragment {
     private TextView mDescription;
     private static FragmentManager sFragmentManager;
     private EditText mEditText;
+    private ArrayAdapter<String> mListAdapter;
+
     CommentAdapter cAdapter;
     public static TaskDialog getInstance(InstagramPhoto item, JSONArray comments, FragmentManager fragmentManager){
         TaskDialog frag = new TaskDialog();
@@ -92,13 +97,16 @@ public class TaskDialog extends DialogFragment {
 //            imageView.setImageResource(R.drawable.icon);
             try {
 //                comment.setText(sComments.getJSONObject(i).getString("text"));
-                commentsList.add(sComments.getJSONObject(i).getString("text"));
+                String commentText = sComments.getJSONObject(i).getString("text");
+                String userName = sComments.getJSONObject(i).getJSONObject("from").getString("username");
+                Comment cmnt = new Comment(userName,commentText);
+                commentsList.add(cmnt.toString());
             } catch (JSONException e) {
                 e.printStackTrace();
             }
 
         }
-        cAdapter = new CommentAdapter(getActivity().getApplicationContext(), 0, commentsList);
+        cAdapter = new CommentAdapter(getActivity().getBaseContext(),commentsList);
 
         lvComments.setAdapter(cAdapter);
 

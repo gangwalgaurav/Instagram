@@ -1,6 +1,7 @@
 package com.codepath.gangwal.instagramclient.adapters;
 
 import android.content.Context;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,7 +10,7 @@ import android.widget.TextView;
 
 import com.codepath.gangwal.instagramclient.R;
 
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Created by gangwal on 2/8/15.
@@ -17,9 +18,8 @@ import java.util.List;
 public class CommentAdapter extends ArrayAdapter<String> {
         private final Context context;
 
-        public CommentAdapter(Context context, int resource, List<String> objects) {
-
-            super(context, R.layout.comments_view );
+        public CommentAdapter(Context context,  ArrayList<String> objects) {
+            super(context, R.layout.comments_view,objects );
             this.context = context;
         }
 
@@ -33,7 +33,7 @@ public class CommentAdapter extends ArrayAdapter<String> {
             TextView textView = (TextView) rowView.findViewById(R.id.tvCComment);
 
 //            ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
-            textView.setText(comment);
+            textView.setText(Html.fromHtml(comment));
             // change the icon for Windows and iPhone
 
             return rowView;
